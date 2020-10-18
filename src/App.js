@@ -1,22 +1,24 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroller";
+import SearchBox from "./SearchBox";
 import "./App.css";
 
 const MAX_CARDS = 20;
 const URL = `https://api.elderscrollslegends.io/v1/cards?page=1&pageSize=${MAX_CARDS}`;
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      cards: [],
-      hasMoreItems: true,
-      nextPage: null,
-    };
-    this.loadCards = this.loadCards.bind(this);
-  }
+  state = {
+    cards: [],
+    hasMoreItems: true,
+    nextPage: null,
+    searchTerm: "",
+  };
 
-  loadCards() {
+  handleChange = (value) => {
+    this.setState({ searchTerm: value.toLowerCase() });
+  };
+
+  loadCards = () => {
     const { cards, nextPage } = this.state;
     const url = nextPage ? nextPage : URL;
 
@@ -36,27 +38,32 @@ class App extends React.Component {
           });
         }
       });
-  }
+  };
 
   render() {
     const cards = this.state.cards.map((card) => {
-      return <p>{card.name}</p>;
+      return <p className="card">{card.name}</p>;
     });
+
+    const showScroll = this.state.searchTerm === "";
 
     return (
       <div className="App">
-        <InfiniteScroll
-          pageStart={0}
-          loadMore={this.loadCards}
-          hasMore={this.state.hasMoreItems}
-          loader={
-            <div className="loader" key={0}>
-              Loading ...
-            </div>
-          }
-        >
-          {cards}
-        </InfiniteScroll>
+        <SearchBox handleChange={this.handleChange} />
+        {showScroll && (
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={this.loadCards}
+            hasMore={this.state.hasMoreItems}
+            loader={
+              <div className="loader" key={0}>
+                Loading ...
+              </div>
+            }
+          >
+            {cards}
+          </InfiniteScroll>
+        )}
       </div>
     );
   }
