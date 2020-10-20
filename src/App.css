@@ -1,9 +1,16 @@
-.App {
+.app {
   text-align: center;
 }
 
-.card {
-  border: 1px solid grey;
-  width: 8rem;
-  height: 8rem;
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.loader {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 2rem;
 }

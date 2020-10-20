@@ -1,5 +1,6 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroller";
+import Card from "./Card";
 import SearchBox from "./SearchBox";
 import "./App.css";
 
@@ -42,13 +43,13 @@ class App extends React.Component {
 
   render() {
     const cards = this.state.cards.map((card) => {
-      return <p className="card">{card.name}</p>;
+      return <Card props={card} />;
     });
 
     const showScroll = this.state.searchTerm === "";
 
     return (
-      <div className="App">
+      <div className="app">
         <SearchBox handleChange={this.handleChange} />
         {showScroll && (
           <InfiniteScroll
@@ -61,7 +62,7 @@ class App extends React.Component {
               </div>
             }
           >
-            {cards}
+            <div className="card-container">{cards}</div>
           </InfiniteScroll>
         )}
       </div>
