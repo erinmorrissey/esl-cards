@@ -1,16 +1,20 @@
 import React from "react";
+import "./Search.css";
 
 function SearchBox(props) {
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <label htmlFor="search">Search</label>
-      <input
-        id="search"
-        type="text"
-        placeholder="Search by name..."
-        onChange={(e) => props.handleChange(e.target.value)}
-      ></input>
-    </form>
+    <div id="search">
+      <form onSubmit={(e) => e.preventDefault()}>
+        <label htmlFor="search">Search cards by name</label>
+        <input
+          id="search"
+          inputMode="search"
+          type="search"
+          placeholder="Search for names..."
+          onChange={(e) => props.handleChange(e.target.value)}
+        ></input>
+      </form>
+    </div>
   );
 }
 

@@ -42,28 +42,34 @@ class App extends React.Component {
   };
 
   render() {
-    const cards = this.state.cards.map((card) => {
-      return <Card props={card} />;
-    });
+    const { cards, hasMoreItems, searchTerm } = this.state;
+    const showScroll = searchTerm === "";
 
-    const showScroll = this.state.searchTerm === "";
+    const scrollCards = cards.map((card) => (
+      <Card props={card} key={card.id} />
+    ));
+    const filteredCards = cards
+      .filter((card) => card.name.toLowerCase().includes(searchTerm))
+      .map((card) => <Card props={card} key={card.id} />);
 
     return (
       <div className="app">
         <SearchBox handleChange={this.handleChange} />
-        {showScroll && (
+        {showScroll ? (
           <InfiniteScroll
             pageStart={0}
             loadMore={this.loadCards}
-            hasMore={this.state.hasMoreItems}
+            hasMore={hasMoreItems}
             loader={
               <div className="loader" key={0}>
                 Loading ...
               </div>
             }
           >
-            <div className="card-container">{cards}</div>
+            <div className="card-container">{scrollCards}</div>
           </InfiniteScroll>
+        ) : (
+          <div className="card-container">{filteredCards}</div>
         )}
       </div>
     );

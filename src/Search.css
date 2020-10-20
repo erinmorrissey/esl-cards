@@ -1,0 +1,35 @@
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#search {
+  background: #1c8199;
+  color: white;
+  font-size: 1.3rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+}
+
+#search label {
+  display: none;
+}
+
+#search input {
+  background-color: white;
+  border-radius: 7px;
+  color: #333333;
+  border: none;
+  height: 4rem;
+  width: 20rem;
+  margin: 1rem;
+  padding: 1rem;
+  top: 0px;
+}
+
+#search input:focus {
+  outline: none;
+}
