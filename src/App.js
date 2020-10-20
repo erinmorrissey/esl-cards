@@ -10,6 +10,7 @@ const URL = `https://api.elderscrollslegends.io/v1/cards?page=1&pageSize=${MAX_C
 class App extends React.Component {
   state = {
     cards: [],
+    hasError: false,
     hasMoreItems: true,
     nextPage: null,
     searchTerm: "",
@@ -19,13 +20,21 @@ class App extends React.Component {
     this.setState({ searchTerm: value.toLowerCase() });
   };
 
+  handleError = () => {
+    this.setState({ hasError: true });
+  };
+
   loadCards = () => {
     const { cards, nextPage } = this.state;
     const url = nextPage ? nextPage : URL;
 
     fetch(url)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) return this.handleError();
+        return response.json();
+      })
       .then((data) => {
+        console.log("DATA: ", data);
         if (data._links.next) {
           this.setState({
             cards: [...cards, ...data.cards],
@@ -38,11 +47,24 @@ class App extends React.Component {
             hasMoreItems: false,
           });
         }
+      })
+      .catch((error) => {
+        console.log(error);
+        this.handleError();
       });
   };
 
+  renderError = () => {
+    return (
+      <div className="error">
+        Oops! Something seems to have gone wrong...{" "}
+        <span>Please try again later.</span>
+      </div>
+    );
+  };
+
   render() {
-    const { cards, hasMoreItems, searchTerm } = this.state;
+    const { cards, hasError, hasMoreItems, searchTerm } = this.state;
     const showScroll = searchTerm === "";
 
     const scrollCards = cards.map((card) => (
@@ -55,7 +77,8 @@ class App extends React.Component {
     return (
       <div className="app">
         <SearchBox handleChange={this.handleChange} />
-        {showScroll ? (
+        {hasError && this.renderError()}
+        {!hasError && showScroll ? (
           <InfiniteScroll
             pageStart={0}
             loadMore={this.loadCards}

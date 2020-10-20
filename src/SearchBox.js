@@ -4,8 +4,10 @@ import "./Search.css";
 function SearchBox(props) {
   return (
     <div id="search">
-      <form onSubmit={(e) => e.preventDefault()}>
-        <label htmlFor="search">Search cards by name</label>
+      <form role="search" onSubmit={(e) => e.preventDefault()}>
+        <label aria-label="Search cards by name" htmlFor="search">
+          Search cards by name
+        </label>
         <input
           id="search"
           inputMode="search"
