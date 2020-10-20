@@ -1,9 +1,9 @@
 import React from "react";
-import "./Search.css";
+import "../styles/Search.css";
 
-function SearchBox(props) {
+function SearchBox({ handleChange }) {
   return (
-    <div id="search">
+    <div className="search">
       <form role="search" onSubmit={(e) => e.preventDefault()}>
         <label aria-label="Search cards by name" htmlFor="search">
           Search cards by name
@@ -13,7 +13,7 @@ function SearchBox(props) {
           inputMode="search"
           type="search"
           placeholder="Search by name..."
-          onChange={(e) => props.handleChange(e.target.value)}
+          onChange={(e) => handleChange(e.target.value)}
         ></input>
       </form>
     </div>

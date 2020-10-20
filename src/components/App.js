@@ -2,7 +2,7 @@ import React from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import Card from "./Card";
 import SearchBox from "./SearchBox";
-import "./App.css";
+import "../styles/App.css";
 
 const MAX_CARDS = 20;
 const URL = `https://api.elderscrollslegends.io/v1/cards?page=1&pageSize=${MAX_CARDS}`;
@@ -34,7 +34,6 @@ class App extends React.Component {
         return response.json();
       })
       .then((data) => {
-        console.log("DATA: ", data);
         if (data._links.next) {
           this.setState({
             cards: [...cards, ...data.cards],
@@ -65,7 +64,7 @@ class App extends React.Component {
 
   render() {
     const { cards, hasError, hasMoreItems, searchTerm } = this.state;
-    const showScroll = searchTerm === "";
+    const showInfiniteScroll = searchTerm === "";
 
     const scrollCards = cards.map((card) => (
       <Card props={card} key={card.id} />
@@ -78,7 +77,7 @@ class App extends React.Component {
       <div className="app">
         <SearchBox handleChange={this.handleChange} />
         {hasError && this.renderError()}
-        {!hasError && showScroll ? (
+        {!hasError && showInfiniteScroll ? (
           <InfiniteScroll
             pageStart={0}
             loadMore={this.loadCards}

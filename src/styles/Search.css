@@ -4,7 +4,7 @@ form {
   justify-content: center;
 }
 
-#search {
+.search {
   background: #1c8199;
   color: white;
   font-size: 1.3rem;
@@ -14,15 +14,16 @@ form {
   height: 100px;
 }
 
-#search label {
+.search label {
   display: none;
 }
 
-#search input {
+.search input {
   background-color: white;
   border-radius: 7px;
   color: #333333;
   border: none;
+  font-size: 1.2rem;
   height: 3.5rem;
   width: 20rem;
   margin: 1.3rem 0;
@@ -30,10 +31,10 @@ form {
   top: 0px;
 }
 
-#search input[type="search"] {
+.search input[type="search"] {
   -webkit-appearance: none; /* remove extra-rounded corners on iOS */
 }
 
-#search input:focus {
+.search input:focus {
   outline: none;
 }

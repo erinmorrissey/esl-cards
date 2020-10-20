@@ -1,27 +1,27 @@
 import React from "react";
-import "./Card.css";
+import "../styles/Card.css";
 
-function Card(props) {
+function Card({ props: { imageUrl, name, set, text, type } }) {
   return (
     <div className="card">
-      <img src={props.props.imageUrl} alt={props.props.name} />
+      <img src={imageUrl} alt={name} />
       <div className="description">
         <p>
           <span>Name</span>
-          {props.props.name}
+          {name}
         </p>
         <p>
           <span>Set Name</span>
-          {props.props.set.name}
+          {set.name}
         </p>
         <p>
           <span>Type</span>
-          {props.props.type}
+          {type}
         </p>
-        {props.props.text && (
+        {text && (
           <p>
             <span>Text</span>
-            {props.props.text}
+            {text}
           </p>
         )}
       </div>
