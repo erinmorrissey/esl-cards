@@ -10,7 +10,7 @@ function SearchBox(props) {
           id="search"
           inputMode="search"
           type="search"
-          placeholder="Search for names..."
+          placeholder="Search by name..."
           onChange={(e) => props.handleChange(e.target.value)}
         ></input>
       </form>

@@ -27,3 +27,13 @@ span {
   margin: 0 auto;
   text-align: left;
 }
+
+@media all and (min-width: 1440px) {
+  img {
+    max-width: 350px;
+  }
+
+  .description {
+    max-width: 275px;
+  }
+}

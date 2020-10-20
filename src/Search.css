@@ -23,11 +23,15 @@ form {
   border-radius: 7px;
   color: #333333;
   border: none;
-  height: 4rem;
+  height: 3.5rem;
   width: 20rem;
-  margin: 1rem;
+  margin: 1.3rem 0;
   padding: 1rem;
   top: 0px;
+}
+
+#search input[type="search"] {
+  -webkit-appearance: none; /* remove extra-rounded corners on iOS */
 }
 
 #search input:focus {
