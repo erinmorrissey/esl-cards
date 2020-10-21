@@ -28,7 +28,7 @@ span {
   text-align: left;
 }
 
-@media all and (min-width: 1440px) {
+@media all and (min-width: 1441px) {
   img {
     max-width: 350px;
   }
